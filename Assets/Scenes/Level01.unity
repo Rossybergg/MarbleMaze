@@ -123,8 +123,9 @@ GameObject:
   - component: {fileID: 14509869}
   - component: {fileID: 14509868}
   - component: {fileID: 14509867}
-  - component: {fileID: 14509866}
   - component: {fileID: 14509870}
+  - component: {fileID: 14509871}
+  - component: {fileID: 14509866}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -132,8 +133,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &14509866
-BoxCollider:
+--- !u!135 &14509866
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -143,7 +144,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &14509867
 MeshRenderer:
@@ -189,7 +190,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 14509865}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &14509869
 Transform:
   m_ObjectHideFlags: 0
@@ -198,7 +199,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 14509865}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.11, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -220,6 +221,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &14509871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14509865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a840d0130991eea46b703eb629f3a0fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 14509870}
+  forwardForce: 500
+  movementForce: 500
+  jumpForce: 1000
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,7 +414,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1491574991}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3a803d3ac2b3b77408e3812b9e80e1ca, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
