@@ -12,7 +12,9 @@ public class playerMovement : MonoBehaviour {
     public float jumpForce = 1000f;
 
     public float boostSpeed = 5000f;
+    public float jumpPadSpeed = 5000f;
     public bool marbleOnGround = true;
+    public bool marbleOnJumpPad = false;
 
     public bool marbleOnSlope = false;
 
@@ -34,7 +36,15 @@ public class playerMovement : MonoBehaviour {
         Vector3 movement = new Vector3(hor, 0f, ver) * speed * Time.deltaTime;
         transform.Translate(movement, Space.Self);
 
-        if ( Input.GetKey("space") && marbleOnGround ) {
+        if ( Input.GetKey("left shift") ) {
+            speed = 10f;
+        } else {
+            speed = 5f;
+        }
+
+        
+
+        if ( Input.GetButton("Jump") && marbleOnGround ) {
             body.AddForce( 0 , jumpForce * Time.deltaTime , 0, ForceMode.Impulse);
             marbleOnGround = false;
         };
@@ -47,8 +57,12 @@ public class playerMovement : MonoBehaviour {
 
         if ( marbleOnBoostPad ) {
             body.AddForce(0, 0, boostSpeed * Time.deltaTime);
-        } else {
-            body.AddForce(0, 0, 0);
+        }
+
+        if ( marbleOnJumpPad ) {
+            body.AddForce( 0 , 0 , 0);
+            body.AddForce( 0 , jumpPadSpeed * Time.deltaTime , 0, ForceMode.Impulse);
+            marbleOnJumpPad = false;
         }
     } 
 
@@ -63,6 +77,10 @@ public class playerMovement : MonoBehaviour {
                 marbleOnGround = true;
                 marbleOnSlope = false;
                 marbleOnBoostPad = true;
+            }
+            if ( collision.gameObject.tag == "JumpPad" ) {
+                marbleOnGround = true;
+                marbleOnJumpPad = true;
             }
 
             if ( collision.gameObject.name == "Slope" ) {

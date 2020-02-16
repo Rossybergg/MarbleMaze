@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Ground
   - BoostPad
+  - JumpPad
+  - SuperJump
+  - SuperBoost
   layers:
   - Default
   - TransparentFX
