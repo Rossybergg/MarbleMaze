@@ -10,9 +10,13 @@ public class playerMovement : MonoBehaviour {
 
     public float strafeSpeed = 500f;
     public float jumpForce = 1000f;
+
+    public float boostSpeed = 5000f;
     public bool marbleOnGround = true;
 
     public bool marbleOnSlope = false;
+
+    public bool marbleOnBoostPad = false;
 
     // Update is called once per frame
     void FixedUpdate()
@@ -40,12 +44,25 @@ public class playerMovement : MonoBehaviour {
         } else {
             body.AddForce(0, 0, 0);
         }
+
+        if ( marbleOnBoostPad ) {
+            body.AddForce(0, 0, boostSpeed * Time.deltaTime);
+        } else {
+            body.AddForce(0, 0, 0);
+        }
     } 
 
     private void OnCollisionEnter(Collision collision) {
         if ( collision.gameObject.tag == "Ground" ) {
                 marbleOnGround = true;
                 marbleOnSlope = false;
+                marbleOnBoostPad = false;
+            }
+
+            if ( collision.gameObject.tag == "BoostPad" ) {
+                marbleOnGround = true;
+                marbleOnSlope = false;
+                marbleOnBoostPad = true;
             }
 
             if ( collision.gameObject.name == "Slope" ) {

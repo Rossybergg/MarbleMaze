@@ -17,7 +17,5 @@ public class betterJump : MonoBehaviour
       if ( rigidBody.velocity.y < -5 ) {
           rigidBody.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
       }
-
-      print(rigidBody.velocity.y);
   }
 }
