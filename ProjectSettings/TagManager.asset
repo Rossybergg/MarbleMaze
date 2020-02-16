@@ -9,6 +9,7 @@ TagManager:
   - JumpPad
   - SuperJump
   - SuperBoost
+  - Gem
   layers:
   - Default
   - TransparentFX

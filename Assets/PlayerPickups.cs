@@ -10,6 +10,8 @@ public class PlayerPickups : MonoBehaviour
     public float superJumpSpeed = 5000f;
     public float superBoostSpeed = 5000f;
 
+    public int gems= 0;
+
     public Rigidbody body;
    private void OnCollisionEnter(Collision collision) {
         
@@ -31,14 +33,20 @@ public class PlayerPickups : MonoBehaviour
     }
 
     void FixedUpdate() {
-        if ( Input.GetKey("v") && hasSuperJump ) {
+        if ( Input.GetKey("e") && hasSuperJump ) {
             body.AddForce( 0 , superJumpSpeed * Time.deltaTime , 0, ForceMode.Impulse);
             hasSuperJump = false;
         }
 
-        if ( Input.GetKey("c") && hasSuperBoost ) {
+        if ( Input.GetKey("r") && hasSuperBoost ) {
             body.AddRelativeForce(0, 0, superBoostSpeed * Time.deltaTime, ForceMode.Impulse);
             hasSuperBoost = false;
         }
+    }
+
+
+    void OnGUI()
+    {
+        GUI.Label(new Rect(10, 10, 100, 20), "Gems: " + gems + "/10");
     }
 }
