@@ -4,37 +4,54 @@ public class playerMovement : MonoBehaviour {
 
     public Rigidbody body;
 
-    public float forwardForce = 2000f;
-    public float movementForce = 500f;
+    public float forwardSpeed = 500f;
+
+    public float speed;
+
+    public float strafeSpeed = 500f;
     public float jumpForce = 1000f;
+    public bool marbleOnGround = true;
+
+    public bool marbleOnSlope = false;
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        // Add forward force to player
-       // body.AddForce(0, 0, forwardForce * Time.deltaTime);
+        playerControl();
 
-        if ( Input.GetKey("w") ) {
-            body.AddForce(0, 0, forwardForce * Time.deltaTime);
-        };
-
-        if ( Input.GetKey("s") ) {
-            body.AddForce(0, 0, -forwardForce * Time.deltaTime);
-        };
-
-
-        if ( Input.GetKey("d") ) {
-            body.AddForce( movementForce * Time.deltaTime , 0, 0);
-        };
-
-        if ( Input.GetKey("a") ) {
-            body.AddForce( -movementForce * Time.deltaTime , 0, 0);
-        };
-
-        if ( Input.GetKey("space") ) {
-            body.AddForce( 0 , jumpForce * Time.deltaTime , 0);
-        };
     }
-    
+
+
+    void playerControl() {
+
+        float hor = Input.GetAxis("Horizontal");
+        float ver = Input.GetAxis("Vertical");
+
+        Vector3 movement = new Vector3(hor, 0f, ver) * speed * Time.deltaTime;
+        transform.Translate(movement, Space.Self);
+
+        if ( Input.GetKey("space") && marbleOnGround ) {
+            body.AddForce( 0 , jumpForce * Time.deltaTime , 0, ForceMode.Impulse);
+            marbleOnGround = false;
+        };
+
+        if ( marbleOnSlope ) {
+            body.AddForce(0, 0, forwardSpeed * Time.deltaTime);
+        } else {
+            body.AddForce(0, 0, 0);
+        }
+    } 
+
+    private void OnCollisionEnter(Collision collision) {
+        if ( collision.gameObject.tag == "Ground" ) {
+                marbleOnGround = true;
+                marbleOnSlope = false;
+            }
+
+            if ( collision.gameObject.name == "Slope" ) {
+                marbleOnSlope= true;
+            }
+
+    }
 
 }
