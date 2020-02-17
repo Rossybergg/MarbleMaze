@@ -3,6 +3,7 @@
 public class playerMovement : MonoBehaviour {
 
     public Rigidbody body;
+    public GameObject fallEffect;
 
     public float forwardSpeed = 500f;
 
@@ -15,9 +16,7 @@ public class playerMovement : MonoBehaviour {
     public float jumpPadSpeed = 5000f;
     public bool marbleOnGround = true;
     public bool marbleOnJumpPad = false;
-
     public bool marbleOnSlope = false;
-
     public bool marbleOnBoostPad = false;
 
     // Update is called once per frame
@@ -71,6 +70,11 @@ public class playerMovement : MonoBehaviour {
                 marbleOnGround = true;
                 marbleOnSlope = false;
                 marbleOnBoostPad = false;
+                    
+                    if (body.velocity.y > 12 ) {
+                        Instantiate(fallEffect, transform.position, transform.rotation);
+                    }
+
             }
 
             if ( collision.gameObject.tag == "BoostPad" ) {
@@ -86,6 +90,8 @@ public class playerMovement : MonoBehaviour {
             if ( collision.gameObject.name == "Slope" ) {
                 marbleOnSlope= true;
             }
+
+
 
     }
 
