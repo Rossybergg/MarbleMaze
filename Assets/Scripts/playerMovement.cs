@@ -29,19 +29,14 @@ public class playerMovement : MonoBehaviour {
 
     void playerControl() {
 
-        float hor = Input.GetAxis("Horizontal");
-        float ver = Input.GetAxis("Vertical");
-
-        Vector3 movement = new Vector3(hor, 0f, ver) * speed * Time.deltaTime;
-        transform.Translate(movement, Space.Self);
-
-        if ( Input.GetKey("left shift") ) {
-            speed = 10f;
-        } else {
-            speed = 5f;
+        if (marbleOnGround) {
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
+            Vector3 movement = new Vector3 (horizontal, 0.0f, vertical);
+            Vector3 relativeMovement = Camera.main.transform.TransformVector(movement);
+            body.AddForce (relativeMovement * speed * Time.deltaTime);
         }
 
-        
 
         if ( Input.GetButton("Jump") && marbleOnGround ) {
             body.AddForce( 0 , jumpForce * Time.deltaTime , 0, ForceMode.Impulse);
